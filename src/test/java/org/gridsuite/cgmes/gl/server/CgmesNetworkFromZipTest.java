@@ -6,7 +6,7 @@
  */
 package org.gridsuite.cgmes.gl.server;
 
-import com.powsybl.cgmes.conformity.test.CgmesConformity1Catalog;
+import com.powsybl.cgmes.conformity.CgmesConformity1Catalog;
 import com.powsybl.cgmes.conversion.CgmesImport;
 import org.gridsuite.cgmes.gl.server.dto.LineGeoData;
 import org.gridsuite.cgmes.gl.server.dto.SubstationGeoData;
@@ -33,7 +33,7 @@ public class CgmesNetworkFromZipTest {
 
     @Test
     public void test() {
-        TestGridModel gridModel =  CgmesConformity1Catalog.microGridBaseCaseBE();
+        TestGridModel gridModel = CgmesConformity1Catalog.microGridBaseCaseBE();
 
         CgmesImport importer = new CgmesImport();
         Properties properties = new Properties();
