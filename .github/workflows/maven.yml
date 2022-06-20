@@ -27,21 +27,6 @@ jobs:
       - name: Build and install case client with Maven
         run: mvn --batch-mode -Pclient -DskipTests=true --file ../powsybl-case/pom.xml install
 
-      - name: Checkout powsybl-cgmes-gl
-        uses: actions/checkout@v1
-        with:
-          repository: powsybl/powsybl-cgmes-gl
-          ref: refs/heads/main
-
-      - name: Build and install powsybl-cgmes-gl with Maven
-        run: mvn --batch-mode -DskipTests=true --file ../powsybl-cgmes-gl/pom.xml install
-
-      - name: Checkout sources
-        uses: actions/checkout@v1
-
-      - name: Build with Maven
-        run: mvn --batch-mode -Pjacoco install
-
       - name: Run SonarCloud analysis
         run: >
           mvn --batch-mode -DskipTests sonar:sonar
