@@ -7,7 +7,6 @@
 package org.gridsuite.cgmes.gl.server.dto;
 
 import com.powsybl.iidm.network.Country;
-import com.powsybl.iidm.network.extensions.Coordinate;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -23,8 +22,8 @@ public class SubstationGeoDataTest {
 
         assertEquals("id", substationGeoData.getId());
         assertEquals(Country.FR, substationGeoData.getCountry());
-        assertEquals(1, substationGeoData.getCoordinate().getLatitude(), 0);
-        assertEquals(1, substationGeoData.getCoordinate().getLongitude(), 0);
+        assertEquals(1, substationGeoData.getCoordinate().getLat(), 0);
+        assertEquals(1, substationGeoData.getCoordinate().getLon(), 0);
 
         SubstationGeoData.SubstationGeoDataBuilder substationGeoDataBuilder = SubstationGeoData.builder();
         substationGeoDataBuilder.id("testID");

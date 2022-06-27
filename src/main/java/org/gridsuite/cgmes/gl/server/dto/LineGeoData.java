@@ -10,11 +10,11 @@ import com.powsybl.iidm.network.Country;
 import com.powsybl.iidm.network.Line;
 import com.powsybl.iidm.network.Substation;
 import lombok.*;
-import com.powsybl.iidm.network.extensions.Coordinate;
 import com.powsybl.iidm.network.extensions.LinePosition;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author Geoffroy Jamgotchian <geoffroy.jamgotchian at rte-france.com>
@@ -35,11 +35,11 @@ public class LineGeoData {
 
     private List<Coordinate> coordinates = new ArrayList<>();
 
-    public static LineGeoData fromLinePosition(LinePosition linePosition) {
+    public static LineGeoData fromLinePosition(LinePosition<?> linePosition) {
         Line l = (Line) linePosition.getExtendable();
         Country country1 = l.getTerminal1().getVoltageLevel().getSubstation().flatMap(Substation::getCountry).orElse(null);
         Country country2 = l.getTerminal2().getVoltageLevel().getSubstation().flatMap(Substation::getCountry).orElse(null);
 
-        return new LineGeoData(l.getId(), country1, country2, linePosition.getCoordinates());
+        return new LineGeoData(l.getId(), country1, country2, linePosition.getCoordinates().stream().map(c -> new Coordinate(c.getLatitude(), c.getLongitude())).collect(Collectors.toList()));
     }
 }

@@ -7,7 +7,6 @@
 package org.gridsuite.cgmes.gl.server.dto;
 
 import com.powsybl.iidm.network.Country;
-import com.powsybl.iidm.network.extensions.Coordinate;
 import org.junit.Test;
 
 import java.util.ArrayList;

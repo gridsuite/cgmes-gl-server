@@ -6,7 +6,7 @@
  */
 package org.gridsuite.cgmes.gl.server;
 
-import com.powsybl.cgmes.conformity.test.CgmesConformity1Catalog;
+import com.powsybl.cgmes.conformity.CgmesConformity1Catalog;
 import com.powsybl.cgmes.conversion.CgmesImport;
 import org.gridsuite.cgmes.gl.server.dto.LineGeoData;
 import org.gridsuite.cgmes.gl.server.dto.SubstationGeoData;
@@ -36,7 +36,7 @@ public class CgmesGeoDataTest {
 
     @Test
     public void test() {
-        TestGridModel gridModel =  CgmesConformity1Catalog.microGridBaseCaseBE();
+        TestGridModel gridModel = CgmesConformity1Catalog.microGridBaseCaseBE();
 
         Properties properties = new Properties();
         properties.put("iidm.import.cgmes.post-processors", "cgmesGLImport");
@@ -68,7 +68,7 @@ public class CgmesGeoDataTest {
         assertEquals(2, substations.size());
         assertEquals(2, lines.size());
 
-        assertEquals(51.3251, substations.get(0).getCoordinate().getLatitude(), 0);
-        assertEquals(4.25926, substations.get(0).getCoordinate().getLongitude(), 0);
+        assertEquals(51.3251, substations.get(0).getCoordinate().getLat(), 0);
+        assertEquals(4.25926, substations.get(0).getCoordinate().getLon(), 0);
     }
 }

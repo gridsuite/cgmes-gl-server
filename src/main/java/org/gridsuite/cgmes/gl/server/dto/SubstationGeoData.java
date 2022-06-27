@@ -9,7 +9,6 @@ package org.gridsuite.cgmes.gl.server.dto;
 import com.powsybl.iidm.network.Country;
 import com.powsybl.iidm.network.Substation;
 import lombok.*;
-import com.powsybl.iidm.network.extensions.Coordinate;
 import com.powsybl.iidm.network.extensions.SubstationPosition;
 
 /**
@@ -30,6 +29,6 @@ public class SubstationGeoData {
 
     public static SubstationGeoData fromSubstationPosition(SubstationPosition substationPosition) {
         Substation s = substationPosition.getExtendable();
-        return new SubstationGeoData(s.getId(), s.getCountry().orElse(null), substationPosition.getCoordinate());
+        return new SubstationGeoData(s.getId(), s.getCountry().orElse(null), new Coordinate(substationPosition.getCoordinate().getLatitude(), substationPosition.getCoordinate().getLongitude()));
     }
 }
