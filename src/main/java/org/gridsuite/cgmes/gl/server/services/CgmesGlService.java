@@ -44,7 +44,7 @@ public class CgmesGlService {
     private String caseServerBaseUri;
 
     @Autowired
-    public CgmesGlService(@Value("${geo-data-server.base.url:http://geo-data-server/}") String geoDataServerBaseUri, @Value("${case-server.base.url:http://case-server/}") String caseServerBaseUri) {
+    public CgmesGlService(@Value("${backing-services.geo-data-server.base-uri:http://geo-data-server/}") String geoDataServerBaseUri, @Value("${backing-services.case-server.base-uri:http://case-server/}") String caseServerBaseUri) {
         this.geoDataServerBaseUri = Objects.requireNonNull(geoDataServerBaseUri);
 
         RestTemplateBuilder restTemplateBuilder = new RestTemplateBuilder();

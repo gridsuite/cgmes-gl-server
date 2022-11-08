@@ -1,0 +1,8 @@
+server:
+  port: 8095
+
+backing-services:
+  geo-data-server:
+    base-uri: http://localhost:8087
+  case-server:
+    base-uri: http://localhost:5000
