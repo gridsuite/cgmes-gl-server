@@ -8,8 +8,8 @@ package org.gridsuite.cgmes.gl.server.services;
 
 import com.powsybl.cases.datasource.CaseDataSourceClient;
 import com.powsybl.cgmes.conformity.CgmesConformity1Catalog;
+import com.powsybl.cgmes.model.GridModelReferenceResources;
 import org.gridsuite.cgmes.gl.server.CgmesNetworkFromZipTest;
-import com.powsybl.cgmes.model.test.TestGridModel;
 import com.powsybl.iidm.network.Network;
 import org.junit.Before;
 import org.junit.Test;
@@ -49,7 +49,7 @@ public class CgmesGlServiceTest {
 
     @Before
     public void mockCaseServer() {
-        TestGridModel gridModel = CgmesConformity1Catalog.microGridBaseCaseBE();
+        GridModelReferenceResources gridModel = CgmesConformity1Catalog.microGridBaseCaseBE();
 
         when(caseServerDataSource.newInputStream(anyString())).then(delegatesTo(gridModel.dataSource()));
         when(caseServerDataSource.getBaseName()).then(delegatesTo(gridModel.dataSource()));
