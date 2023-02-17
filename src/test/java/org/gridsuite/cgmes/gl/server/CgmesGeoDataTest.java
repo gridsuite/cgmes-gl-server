@@ -8,9 +8,9 @@ package org.gridsuite.cgmes.gl.server;
 
 import com.powsybl.cgmes.conformity.CgmesConformity1Catalog;
 import com.powsybl.cgmes.conversion.CgmesImport;
+import com.powsybl.cgmes.model.GridModelReferenceResources;
 import org.gridsuite.cgmes.gl.server.dto.LineGeoData;
 import org.gridsuite.cgmes.gl.server.dto.SubstationGeoData;
-import com.powsybl.cgmes.model.test.TestGridModel;
 import com.powsybl.iidm.network.extensions.LinePosition;
 import com.powsybl.iidm.network.extensions.SubstationPosition;
 import com.powsybl.iidm.network.Line;
@@ -36,7 +36,7 @@ public class CgmesGeoDataTest {
 
     @Test
     public void test() {
-        TestGridModel gridModel = CgmesConformity1Catalog.microGridBaseCaseBE();
+        GridModelReferenceResources gridModel = CgmesConformity1Catalog.microGridBaseCaseBE();
 
         Properties properties = new Properties();
         properties.put("iidm.import.cgmes.post-processors", "cgmesGLImport");

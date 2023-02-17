@@ -8,9 +8,9 @@ package org.gridsuite.cgmes.gl.server;
 
 import com.powsybl.cgmes.conformity.CgmesConformity1Catalog;
 import com.powsybl.cgmes.conversion.CgmesImport;
+import com.powsybl.cgmes.model.GridModelReferenceResources;
 import org.gridsuite.cgmes.gl.server.dto.LineGeoData;
 import org.gridsuite.cgmes.gl.server.dto.SubstationGeoData;
-import com.powsybl.cgmes.model.test.TestGridModel;
 import com.powsybl.iidm.network.Country;
 import com.powsybl.iidm.network.Line;
 import com.powsybl.iidm.network.Network;
@@ -33,7 +33,7 @@ public class CgmesNetworkFromZipTest {
 
     @Test
     public void test() {
-        TestGridModel gridModel = CgmesConformity1Catalog.microGridBaseCaseBE();
+        GridModelReferenceResources gridModel = CgmesConformity1Catalog.microGridBaseCaseBE();
 
         CgmesImport importer = new CgmesImport();
         Properties properties = new Properties();
