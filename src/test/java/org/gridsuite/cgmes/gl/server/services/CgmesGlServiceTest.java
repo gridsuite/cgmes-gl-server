@@ -42,7 +42,7 @@ public class CgmesGlServiceTest {
     private CaseDataSourceClient caseServerDataSource;
 
     @InjectMocks
-    private CgmesGlService cgmesGlService =  Mockito.spy(new CgmesGlService("https://localhost:8087", "https://localhost:8085"));
+    private CgmesGlService cgmesGlService = Mockito.spy(new CgmesGlService("https://localhost:8087", "https://localhost:8085"));
 
     private static final UUID CASE_UUID = UUID.randomUUID();
     private static final String CASENAME = "CGMES_v2_4_15_MicroGridTestConfiguration_BC_BE_v2.zip";
