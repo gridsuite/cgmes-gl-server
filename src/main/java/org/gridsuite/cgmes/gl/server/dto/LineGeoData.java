@@ -33,6 +33,7 @@ public class LineGeoData {
 
     private Country country2;
 
+    @Builder.Default
     private List<Coordinate> coordinates = new ArrayList<>();
 
     public static LineGeoData fromLinePosition(LinePosition<?> linePosition) {
