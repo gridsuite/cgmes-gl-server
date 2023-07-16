@@ -13,7 +13,7 @@
     <parent>
         <groupId>com.powsybl</groupId>
         <artifactId>powsybl-parent-ws</artifactId>
-        <version>11</version>
+        <version>12</version>
         <relativePath/>
     </parent>
 
@@ -101,6 +101,7 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
