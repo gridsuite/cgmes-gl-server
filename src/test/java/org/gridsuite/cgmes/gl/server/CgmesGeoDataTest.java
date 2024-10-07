@@ -9,16 +9,14 @@ package org.gridsuite.cgmes.gl.server;
 import com.powsybl.cgmes.conformity.CgmesConformity1Catalog;
 import com.powsybl.cgmes.conversion.CgmesImport;
 import com.powsybl.cgmes.model.GridModelReferenceResources;
-import org.gridsuite.cgmes.gl.server.dto.LineGeoData;
-import org.gridsuite.cgmes.gl.server.dto.SubstationGeoData;
-import com.powsybl.iidm.network.extensions.LinePosition;
-import com.powsybl.iidm.network.extensions.SubstationPosition;
 import com.powsybl.iidm.network.Line;
 import com.powsybl.iidm.network.Network;
+import com.powsybl.iidm.network.extensions.LinePosition;
+import com.powsybl.iidm.network.extensions.SubstationPosition;
 import com.powsybl.iidm.network.impl.NetworkFactoryImpl;
-import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.gridsuite.cgmes.gl.server.dto.LineGeoData;
+import org.gridsuite.cgmes.gl.server.dto.SubstationGeoData;
+import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,16 +24,14 @@ import java.util.Objects;
 import java.util.Properties;
 import java.util.stream.Collectors;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * @author Chamseddine Benhamed <chamseddine.benhamed at rte-france.com>
  */
-public class CgmesGeoDataTest {
-    private static final Logger LOG = LoggerFactory.getLogger(CgmesGeoDataTest.class);
-
+class CgmesGeoDataTest {
     @Test
-    public void test() {
+    void test() {
         GridModelReferenceResources gridModel = CgmesConformity1Catalog.microGridBaseCaseBE();
 
         Properties properties = new Properties();
