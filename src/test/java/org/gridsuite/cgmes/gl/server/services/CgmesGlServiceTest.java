@@ -9,21 +9,21 @@ package org.gridsuite.cgmes.gl.server.services;
 import com.powsybl.cases.datasource.CaseDataSourceClient;
 import com.powsybl.cgmes.conformity.CgmesConformity1Catalog;
 import com.powsybl.cgmes.model.GridModelReferenceResources;
-import org.gridsuite.cgmes.gl.server.CgmesNetworkFromZipTest;
 import com.powsybl.iidm.network.Network;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.gridsuite.cgmes.gl.server.utils.TestUtils;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.HashSet;
 import java.util.UUID;
 
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.AdditionalAnswers.delegatesTo;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.doReturn;
@@ -32,23 +32,22 @@ import static org.mockito.Mockito.when;
 /**
  * @author Chamseddine Benhamed <chamseddine.benhamed at rte-france.com>
  */
-@RunWith(MockitoJUnitRunner.class)
-public class CgmesGlServiceTest {
+@ExtendWith(MockitoExtension.class)
+class CgmesGlServiceTest {
 
     @Mock
-    private RestTemplate geoDataServerRest;
+    private RestTemplate geoDataServerRest; //halt http client
 
     @Mock
-    private CaseDataSourceClient caseServerDataSource;
+    private CaseDataSourceClient caseServerDataSource; //halt database
 
     @InjectMocks
     private CgmesGlService cgmesGlService = Mockito.spy(new CgmesGlService("https://localhost:8087", "https://localhost:8085"));
 
     private static final UUID CASE_UUID = UUID.randomUUID();
-    private static final String CASENAME = "CGMES_v2_4_15_MicroGridTestConfiguration_BC_BE_v2.zip";
 
-    @Before
-    public void mockCaseServer() {
+    @BeforeEach
+    void mockCaseServer() {
         GridModelReferenceResources gridModel = CgmesConformity1Catalog.microGridBaseCaseBE();
 
         when(caseServerDataSource.newInputStream(anyString())).then(delegatesTo(gridModel.dataSource()));
@@ -59,12 +58,13 @@ public class CgmesGlServiceTest {
     }
 
     @Test
-    public void test() {
+    void test() {
         Network network = cgmesGlService.getNetwork(CASE_UUID);
         assertNotNull(network);
 
-        CgmesNetworkFromZipTest.checkExtensions(network, new HashSet<>());
+        TestUtils.checkExtensions(network, new HashSet<>());
 
         cgmesGlService.toGeoDataServer(CASE_UUID, new HashSet<>());
+        //TODO missing assertion(s) of result
     }
 }

@@ -7,17 +7,17 @@
 package org.gridsuite.cgmes.gl.server.dto;
 
 import com.powsybl.iidm.network.Country;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * @author Chamseddine Benhamed <chamseddine.benhamed at rte-france.com>
  */
-public class SubstationGeoDataTest {
+class SubstationGeoDataTest {
 
     @Test
-    public void test() {
+    void test() {
         SubstationGeoData substationGeoData = new SubstationGeoData("id", Country.FR, new Coordinate(1, 1));
 
         assertEquals("id", substationGeoData.getId());
