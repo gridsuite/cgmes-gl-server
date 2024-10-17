@@ -7,21 +7,21 @@
 package org.gridsuite.cgmes.gl.server.dto;
 
 import com.powsybl.iidm.network.Country;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * @author Chamseddine Benhamed <chamseddine.benhamed at rte-france.com>
  */
-public class LineGeoDataTest {
+class LineGeoDataTest {
 
     @Test
-    public void test() {
+    void test() {
         LineGeoData lineGeoData = new LineGeoData("l", Country.FR, Country.FR, new ArrayList<>());
 
         assertEquals("l", lineGeoData.getId());
