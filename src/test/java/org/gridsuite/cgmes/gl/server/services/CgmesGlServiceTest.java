@@ -53,6 +53,7 @@ class CgmesGlServiceTest {
         when(caseServerDataSource.newInputStream(anyString())).then(delegatesTo(gridModel.dataSource()));
         when(caseServerDataSource.getBaseName()).then(delegatesTo(gridModel.dataSource()));
         when(caseServerDataSource.listNames(anyString())).then(delegatesTo(gridModel.dataSource()));
+        when(caseServerDataSource.exists(anyString())).then(delegatesTo(gridModel.dataSource()));
 
         doReturn(caseServerDataSource).when(cgmesGlService).createCaseServerDataSource(CASE_UUID);
     }
