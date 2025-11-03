@@ -18,6 +18,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.HashSet;
@@ -42,7 +43,7 @@ class CgmesGlServiceTest {
     private CaseDataSourceClient caseServerDataSource; //halt database
 
     @InjectMocks
-    private CgmesGlService cgmesGlService = Mockito.spy(new CgmesGlService("https://localhost:8087", "https://localhost:8085"));
+    private CgmesGlService cgmesGlService = Mockito.spy(new CgmesGlService("https://localhost:8087", "https://localhost:8085", new RestTemplateBuilder()));
 
     private static final UUID CASE_UUID = UUID.randomUUID();
 

@@ -42,12 +42,11 @@ public class CgmesGlService {
 
     private String caseServerBaseUri;
 
-    public CgmesGlService(@Value("${geo-data-server.base.url:http://geo-data-server/}") String geoDataServerBaseUri, @Value("${case-server.base.url:http://case-server/}") String caseServerBaseUri) {
+    public CgmesGlService(@Value("${geo-data-server.base.url:http://geo-data-server/}") String geoDataServerBaseUri,
+                          @Value("${case-server.base.url:http://case-server/}") String caseServerBaseUri,
+                          RestTemplateBuilder restTemplateBuilder) {
         this.geoDataServerBaseUri = Objects.requireNonNull(geoDataServerBaseUri);
-
-        RestTemplateBuilder restTemplateBuilder = new RestTemplateBuilder();
-        this.geoDataServerRest = restTemplateBuilder.build();
-        this.geoDataServerRest.setUriTemplateHandler(new DefaultUriBuilderFactory(geoDataServerBaseUri));
+        this.geoDataServerRest = restTemplateBuilder.uriTemplateHandler(new DefaultUriBuilderFactory(geoDataServerBaseUri)).build();
 
         this.caseServerBaseUri = Objects.requireNonNull(caseServerBaseUri);
     }
