@@ -42,13 +42,19 @@ class CgmesGlServiceTest {
     @Mock
     private CaseDataSourceClient caseServerDataSource; //halt database
 
-    @InjectMocks
-    private CgmesGlService cgmesGlService = Mockito.spy(new CgmesGlService("https://localhost:8087", "https://localhost:8085", new RestTemplateBuilder()));
+    @Mock
+    private RestTemplateBuilder restTemplateBuilder;
+
+    private CgmesGlService cgmesGlService;
 
     private static final UUID CASE_UUID = UUID.randomUUID();
 
     @BeforeEach
     void mockCaseServer() {
+        when(restTemplateBuilder.uriTemplateHandler(Mockito.any())).thenReturn(restTemplateBuilder);
+        when(restTemplateBuilder.build()).thenReturn(geoDataServerRest);
+        cgmesGlService = Mockito.spy(new CgmesGlService("https://localhost:8087", "https://localhost:8085", restTemplateBuilder));
+
         GridModelReferenceResources gridModel = CgmesConformity1Catalog.microGridBaseCaseBE();
 
         when(caseServerDataSource.newInputStream(anyString())).then(delegatesTo(gridModel.dataSource()));
