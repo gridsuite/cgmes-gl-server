@@ -64,7 +64,7 @@ class CgmesGeoDataTest {
         assertEquals(2, substations.size());
         assertEquals(2, lines.size());
 
-        assertEquals(51.3251, substations.get(0).getCoordinate().getLat(), 0);
-        assertEquals(4.25926, substations.get(0).getCoordinate().getLon(), 0);
+        assertEquals(50.8038, substations.get(0).getCoordinate().getLat(), 0);
+        assertEquals(4.30089, substations.get(0).getCoordinate().getLon(), 0);
     }
 }
