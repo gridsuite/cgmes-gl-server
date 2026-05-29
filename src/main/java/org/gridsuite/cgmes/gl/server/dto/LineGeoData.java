@@ -9,9 +9,8 @@ package org.gridsuite.cgmes.gl.server.dto;
 import com.powsybl.iidm.network.Country;
 import com.powsybl.iidm.network.Line;
 import com.powsybl.iidm.network.Substation;
-import lombok.*;
 import com.powsybl.iidm.network.extensions.LinePosition;
-
+import lombok.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;

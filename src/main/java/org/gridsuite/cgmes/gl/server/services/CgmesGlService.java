@@ -8,11 +8,11 @@ package org.gridsuite.cgmes.gl.server.services;
 
 import com.powsybl.cases.datasource.CaseDataSourceClient;
 import com.powsybl.cgmes.conversion.CgmesImport;
-import org.gridsuite.cgmes.gl.server.dto.LineGeoData;
-import org.gridsuite.cgmes.gl.server.dto.SubstationGeoData;
 import com.powsybl.iidm.network.*;
 import com.powsybl.iidm.network.extensions.LinePosition;
 import com.powsybl.iidm.network.extensions.SubstationPosition;
+import org.gridsuite.cgmes.gl.server.dto.LineGeoData;
+import org.gridsuite.cgmes.gl.server.dto.SubstationGeoData;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -25,7 +25,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.DefaultUriBuilderFactory;
 import org.springframework.web.util.UriComponentsBuilder;
-
 import java.util.*;
 import java.util.stream.Collectors;
 

@@ -6,16 +6,15 @@
  */
 package org.gridsuite.cgmes.gl.server;
 
-import org.gridsuite.cgmes.gl.server.services.CgmesGlService;
 import com.powsybl.iidm.network.Country;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import org.gridsuite.cgmes.gl.server.services.CgmesGlService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
@@ -49,5 +48,4 @@ public class CgmesGlController {
         cgmesGlService.toGeoDataServer(caseUuid, countrySet);
     }
 }
-
 
