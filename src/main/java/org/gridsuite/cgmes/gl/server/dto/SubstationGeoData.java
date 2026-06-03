@@ -8,8 +8,8 @@ package org.gridsuite.cgmes.gl.server.dto;
 
 import com.powsybl.iidm.network.Country;
 import com.powsybl.iidm.network.Substation;
-import lombok.*;
 import com.powsybl.iidm.network.extensions.SubstationPosition;
+import lombok.*;
 
 /**
  * @author Chamseddine Benhamed <chamseddine.benhamed at rte-france.com>
