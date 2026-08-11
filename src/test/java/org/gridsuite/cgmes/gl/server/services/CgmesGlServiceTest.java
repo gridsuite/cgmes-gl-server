@@ -50,7 +50,7 @@ class CgmesGlServiceTest {
 
     @BeforeEach
     void mockCaseServer() {
-        when(restTemplateBuilder.uriTemplateHandler(Mockito.any())).thenReturn(restTemplateBuilder);
+        when(restTemplateBuilder.rootUri(Mockito.any())).thenReturn(restTemplateBuilder);
         when(restTemplateBuilder.build()).thenReturn(geoDataServerRest);
         cgmesGlService = Mockito.spy(new CgmesGlService("https://localhost:8087", "https://localhost:8085", restTemplateBuilder));
 
