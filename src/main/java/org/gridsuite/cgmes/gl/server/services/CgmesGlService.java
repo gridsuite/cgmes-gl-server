@@ -23,7 +23,6 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
-import org.springframework.web.util.DefaultUriBuilderFactory;
 import org.springframework.web.util.UriComponentsBuilder;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -45,7 +44,9 @@ public class CgmesGlService {
                           @Value("${case-server.base.url:http://case-server/}") String caseServerBaseUri,
                           RestTemplateBuilder restTemplateBuilder) {
         this.geoDataServerBaseUri = Objects.requireNonNull(geoDataServerBaseUri);
-        this.geoDataServerRest = restTemplateBuilder.uriTemplateHandler(new DefaultUriBuilderFactory(geoDataServerBaseUri)).build();
+        this.geoDataServerRest = restTemplateBuilder
+                .rootUri(geoDataServerBaseUri)
+                .build();
 
         this.caseServerBaseUri = Objects.requireNonNull(caseServerBaseUri);
     }
