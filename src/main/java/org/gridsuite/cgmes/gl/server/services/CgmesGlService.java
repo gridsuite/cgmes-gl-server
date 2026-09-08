@@ -11,18 +11,15 @@ import com.powsybl.cgmes.conversion.CgmesImport;
 import com.powsybl.iidm.network.*;
 import com.powsybl.iidm.network.extensions.LinePosition;
 import com.powsybl.iidm.network.extensions.SubstationPosition;
+import lombok.Getter;
 import org.gridsuite.cgmes.gl.server.dto.LineGeoData;
 import org.gridsuite.cgmes.gl.server.dto.SubstationGeoData;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.web.client.RestTemplateBuilder;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
+import org.springframework.web.client.RestClient;
 import org.springframework.web.util.UriComponentsBuilder;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -35,17 +32,18 @@ public class CgmesGlService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(CgmesGlService.class);
 
-    private RestTemplate geoDataServerRest;
+    private RestClient geoDataServerRestClient;
+    @Getter
     private String geoDataServerBaseUri;
 
     private String caseServerBaseUri;
 
     public CgmesGlService(@Value("${geo-data-server.base.url:http://geo-data-server/}") String geoDataServerBaseUri,
                           @Value("${case-server.base.url:http://case-server/}") String caseServerBaseUri,
-                          RestTemplateBuilder restTemplateBuilder) {
+                          RestClient.Builder restClientBuilder) {
         this.geoDataServerBaseUri = Objects.requireNonNull(geoDataServerBaseUri);
-        this.geoDataServerRest = restTemplateBuilder
-                .rootUri(geoDataServerBaseUri)
+        this.geoDataServerRestClient = restClientBuilder
+                .baseUrl(geoDataServerBaseUri)
                 .build();
 
         this.caseServerBaseUri = Objects.requireNonNull(caseServerBaseUri);
@@ -97,29 +95,22 @@ public class CgmesGlService {
     }
 
     private void pushSubstations(List<SubstationGeoData> substationsGeoData) {
-        HttpHeaders requestHeaders = new HttpHeaders();
-        requestHeaders.setContentType(MediaType.APPLICATION_JSON);
-        UriComponentsBuilder uriBuilder = UriComponentsBuilder.fromHttpUrl(geoDataServerBaseUri + "/" + CgmesGlConstants.GEO_DATA_API_VERSION + "/substations");
+        UriComponentsBuilder uriBuilder = UriComponentsBuilder.fromHttpUrl(CgmesGlConstants.GEO_DATA_API_VERSION + "/substations");
 
-        HttpEntity<List<SubstationGeoData>> requestEntity = new HttpEntity<>(substationsGeoData, requestHeaders);
-
-        geoDataServerRest.exchange(uriBuilder.toUriString(),
-                HttpMethod.POST,
-                requestEntity,
-                Void.class);
+        geoDataServerRestClient.post().uri(uriBuilder.toUriString())
+            .body(substationsGeoData)
+            .headers(headers -> headers.setContentType(MediaType.APPLICATION_JSON))
+            .retrieve()
+            .toBodilessEntity();
     }
 
     private void pushLines(List<LineGeoData> linesGeoData) {
-        HttpHeaders requestHeaders = new HttpHeaders();
-        requestHeaders.setContentType(MediaType.APPLICATION_JSON);
+        UriComponentsBuilder uriBuilder = UriComponentsBuilder.fromHttpUrl(CgmesGlConstants.GEO_DATA_API_VERSION + "/lines");
 
-        UriComponentsBuilder uriBuilder = UriComponentsBuilder.fromHttpUrl(geoDataServerBaseUri + "/" + CgmesGlConstants.GEO_DATA_API_VERSION + "/lines");
-
-        HttpEntity<List<LineGeoData>> requestEntity = new HttpEntity<>(linesGeoData, requestHeaders);
-
-        geoDataServerRest.exchange(uriBuilder.toUriString(),
-                HttpMethod.POST,
-                requestEntity,
-                Void.class);
+        geoDataServerRestClient.post().uri(uriBuilder.toUriString())
+            .body(linesGeoData)
+            .headers(headers -> headers.setContentType(MediaType.APPLICATION_JSON))
+            .retrieve()
+            .toBodilessEntity();
     }
 }
