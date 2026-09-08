@@ -11,6 +11,7 @@ import com.powsybl.cgmes.conversion.CgmesImport;
 import com.powsybl.iidm.network.*;
 import com.powsybl.iidm.network.extensions.LinePosition;
 import com.powsybl.iidm.network.extensions.SubstationPosition;
+import lombok.Getter;
 import org.gridsuite.cgmes.gl.server.dto.LineGeoData;
 import org.gridsuite.cgmes.gl.server.dto.SubstationGeoData;
 import org.slf4j.Logger;
@@ -32,6 +33,7 @@ public class CgmesGlService {
     private static final Logger LOGGER = LoggerFactory.getLogger(CgmesGlService.class);
 
     private RestClient geoDataServerRestClient;
+    @Getter
     private String geoDataServerBaseUri;
 
     private String caseServerBaseUri;
@@ -93,7 +95,7 @@ public class CgmesGlService {
     }
 
     private void pushSubstations(List<SubstationGeoData> substationsGeoData) {
-        UriComponentsBuilder uriBuilder = UriComponentsBuilder.fromHttpUrl(geoDataServerBaseUri + "/" + CgmesGlConstants.GEO_DATA_API_VERSION + "/substations");
+        UriComponentsBuilder uriBuilder = UriComponentsBuilder.fromHttpUrl(CgmesGlConstants.GEO_DATA_API_VERSION + "/substations");
 
         geoDataServerRestClient.post().uri(uriBuilder.toUriString())
             .body(substationsGeoData)
@@ -103,7 +105,7 @@ public class CgmesGlService {
     }
 
     private void pushLines(List<LineGeoData> linesGeoData) {
-        UriComponentsBuilder uriBuilder = UriComponentsBuilder.fromHttpUrl(geoDataServerBaseUri + "/" + CgmesGlConstants.GEO_DATA_API_VERSION + "/lines");
+        UriComponentsBuilder uriBuilder = UriComponentsBuilder.fromHttpUrl(CgmesGlConstants.GEO_DATA_API_VERSION + "/lines");
 
         geoDataServerRestClient.post().uri(uriBuilder.toUriString())
             .body(linesGeoData)

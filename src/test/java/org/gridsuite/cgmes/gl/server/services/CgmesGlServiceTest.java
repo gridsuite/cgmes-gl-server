@@ -14,10 +14,7 @@ import org.gridsuite.cgmes.gl.server.utils.TestUtils;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
-import org.mockito.Mockito;
-import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.client.RestClientTest;
 import org.springframework.http.HttpMethod;
@@ -53,6 +50,8 @@ class CgmesGlServiceTest {
     @MockitoSpyBean
     private CgmesGlService cgmesGlService;
 
+    private String geoDataServerBaseUri;
+
     private static final UUID CASE_UUID = UUID.randomUUID();
 
     @BeforeEach
@@ -66,6 +65,8 @@ class CgmesGlServiceTest {
         when(caseServerDataSource.exists(anyString())).then(delegatesTo(gridModel.dataSource()));
 
         doReturn(caseServerDataSource).when(cgmesGlService).createCaseServerDataSource(CASE_UUID);
+
+        geoDataServerBaseUri = cgmesGlService.getGeoDataServerBaseUri();
     }
 
     @AfterEach
@@ -81,7 +82,7 @@ class CgmesGlServiceTest {
         TestUtils.checkExtensions(network, new HashSet<>());
 
         geoDataServer.expect(requestTo(
-                "http://localhost:8087/" +
+                geoDataServerBaseUri + "/" +
                     CgmesGlConstants.GEO_DATA_API_VERSION +
                     "/substations"
             ))
@@ -90,7 +91,7 @@ class CgmesGlServiceTest {
             .andRespond(withSuccess());
 
         geoDataServer.expect(requestTo(
-                "http://localhost:8087/" +
+                geoDataServerBaseUri + "/" +
                     CgmesGlConstants.GEO_DATA_API_VERSION +
                     "/lines"
             ))
