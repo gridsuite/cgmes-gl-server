@@ -95,7 +95,7 @@ public class CgmesGlService {
     }
 
     private void pushSubstations(List<SubstationGeoData> substationsGeoData) {
-        UriComponentsBuilder uriBuilder = UriComponentsBuilder.fromHttpUrl(CgmesGlConstants.GEO_DATA_API_VERSION + "/substations");
+        UriComponentsBuilder uriBuilder = UriComponentsBuilder.fromUriString(CgmesGlConstants.GEO_DATA_API_VERSION + "/substations");
 
         geoDataServerRestClient.post().uri(uriBuilder.toUriString())
             .body(substationsGeoData)
@@ -105,7 +105,7 @@ public class CgmesGlService {
     }
 
     private void pushLines(List<LineGeoData> linesGeoData) {
-        UriComponentsBuilder uriBuilder = UriComponentsBuilder.fromHttpUrl(CgmesGlConstants.GEO_DATA_API_VERSION + "/lines");
+        UriComponentsBuilder uriBuilder = UriComponentsBuilder.fromUriString(CgmesGlConstants.GEO_DATA_API_VERSION + "/lines");
 
         geoDataServerRestClient.post().uri(uriBuilder.toUriString())
             .body(linesGeoData)

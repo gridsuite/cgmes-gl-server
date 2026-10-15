@@ -14,9 +14,11 @@ import org.gridsuite.cgmes.gl.server.utils.TestUtils;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.client.RestClientTest;
+import org.springframework.boot.restclient.test.autoconfigure.RestClientTest;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.bean.override.mockito.MockitoSpyBean;
@@ -39,6 +41,7 @@ import static org.springframework.test.web.client.response.MockRestResponseCreat
  * @author Chamseddine Benhamed <chamseddine.benhamed at rte-france.com>
  */
 @RestClientTest(CgmesGlService.class)
+@ExtendWith(MockitoExtension.class)
 class CgmesGlServiceTest {
 
     @Autowired
